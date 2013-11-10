@@ -1,0 +1,157 @@
+/*
+* css document
+*
+*/
+
+
+body{
+	/*width: 900px;
+	//margin: 0 auto;
+border: 2px solid darkgreen;
+	padding: 15px;*/
+	
+background: #000 url(images/fundo.jpg) no-repeat;
+background-color:#FFFFED;
+	
+}
+
+
+#wrapper {
+
+
+}
+
+.formEntrada{
+
+width: 150px;
+margin: 1px auto;
+float:left;
+position:absolute;
+top: 20px;
+left: 0px;
+
+}
+
+
+
+
+.tableEntrada{
+
+position:absolute;
+top:15%;
+left: 13%;
+
+
+
+}
+#tableEntrada{
+width:350%;
+}
+#tableContas{
+width:165%;
+}
+.tablecontas{
+
+position:absolute;
+top: 50%;
+left: 13%;
+
+}
+
+#legend{
+
+border-width: medium;
+border-style: solid;
+border-color: #00f;
+}
+.formcontas{
+
+width: 100px;
+margin: 1px auto;
+float:left;
+position:absolute;
+top: 230px;
+left: 0px;
+
+	
+
+
+
+
+}
+
+
+
+
+label {
+	display: block;
+	margin-bottom: 2px;
+}
+
+label input,label select {
+	display: block;
+}
+
+#img-calendar3{
+position:absolute;
+top: 94px;
+left: 135px;
+}
+#img-calendar2{
+position:absolute;
+top: 138px;
+left: 135px;
+}
+#img-calendar{
+position:absolute;
+top: 93px;
+left: 135px;
+}
+
+input[type='text'] {
+	border: 2px solid #000;
+}
+
+.saldoEntrada{
+position:absolute;
+top: 0px;
+left: 10px;
+}
+
+.totalEntrada{
+position:absolute;
+top:44px;
+left: 180px;
+}
+.totalConta{
+position:absolute;
+top:60px;
+left: 572px;
+}
+
+
+.totalContaPaga{
+position:absolute;
+top:60px;
+left: 870px;
+}
+
+h1{
+position:absolute;
+top:0%;
+left:40%;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

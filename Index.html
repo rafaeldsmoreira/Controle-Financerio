@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html ng-app="conversionApp">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="css/buttons.css">
+<link rel="stylesheet" href="css/headers.css">
+<link rel="stylesheet" href="css/input_areas.css">
+<link rel="stylesheet" href="css/util.css">
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/cross_browser.css">
+<link rel="stylesheet" href="css/drawer.css">
+<link rel="stylesheet" href="css/style.css">
+<title>Unit Converter</title>
+
+</head>
+<body ng-controller="ContasController">
+
+
+<section id="index" data-position="current">
+  <section data-type="sidebar">
+    <header>
+      <menu type="toolbar">
+        <a href="#">Done</a>
+      </menu>
+      <h1>Units</h1>
+    </header>
+    <nav>
+      <h2>Length</h2>
+      <ul>
+        <li>
+          <a href="#" ng-click="setentradas()">Entrada de contas</a>
+        </li>
+        <li>
+          <a href="#" ng-click="setpagar()">Pagar conta</a>
+        </li>
+      <li>
+          <a href="#" ng-click="setrelatorio()">Relatorios</a>
+        </li>
+        
+      </ul>
+    </nav>
+  </section>
+
+
+
+  <section id="drawer" role="region">
+    <header class="fixed">
+      <a href="#">
+        <span class="icon icon-menu">hide sidebar</span>
+      </a>
+      <a href="#drawer">
+        <span class="icon icon-menu">show sidebar</span>
+      </a>
+      <h1>Controle Financeiro</h1>
+    </header>
+
+    <!-- Entradas -->
+
+
+    <article ng-show="entradas" class="content scrollable header">
+      <form id="contas">
+        <section>
+           <label for="descricao">Descrição
+          <input type="text" name="descricao" ng-model="conta.descricao" placeholder="Descrição" />
+          <input id="id" type="hidden" ng-model="conta.idEntrada" value='0'/>
+          
+          
+          
+        </label>
+        
+        <label for="data">Vencimento
+          <input type="text"   ng-model="conta.vencimento" placeholder="Vencimento"/>
+          
+        </label>
+        
+        <label >
+
+        Valor
+          <input type="text" id="valor"  ng-model="conta.valor" placeholder="Valor"/>
+        </label>    
+      
+      
+        
+          <button ng-click="addContas()">Add</button>
+          <button ng-click="load()">visualizar</button>
+          <button type="reset()">Limpar</button> 
+              
+    
+        </section>
+
+
+        
+      </form>
+
+
+       <section>
+         
+          <table id="tableEntrada">
+        <caption>Entradas</caption>
+          <thead>
+            <tr>
+               <th>id</th>
+              <th>Descrição</th>
+              <th>Data    </th>
+              <th>Valor</th>
+              <th>Action</th>
+              
+            </tr> 
+          </thead>  
+          
+          <tbody>
+            
+
+          <tr  ng-repeat="c in contas">
+            <td>{{c.idEntrada}}</td>
+          <td>{{c.descricao}}</td>
+          <td>{{c.vencimento}}</td>
+          <td>{{c.valor}}</td>
+          <td>[<a href="#" ng-click="editar(c)">Editar</a> <a href="#" ng-click="excluir(c)">Excluir</a>
+            <a href="#" ng-click="pagar(c)">Pagar</a>]</td>
+        </tr>            
+          </tbody>
+            
+        
+      </table>
+
+        </section>
+    </article>
+
+    <!-- Pagar contas -->
+    <article ng-show="pagar" class="content scrollable header">
+      <form>
+        <section>
+            
+
+          
+      <legend>Dados da conta</legend>
+        
+          <label for="descricaoc">Descrição
+            <input type="text" id="descricaoc" name="descricaoc" ng-model="descricaoc" placeholder="Descriçã"/>
+            <input id="idConta" type="hidden" value="" />
+            
+          </label>
+          
+          <label for="datalancamento">Data do Lançamento
+            <input type="text" id="datalancamento" readonly="readonly" ng-model="datalancamento" placeholder="Data"/>
+         
+          </label>
+        
+        
+      
+          <label for="datavencimento">Data do Vencimento
+            <input type="text" id="datavencimento"readonly="readonly" ng-model="datavencimento" placeholder="Vencimento"/>
+          
+          </label>
+          
+          <label for="multaa">Multa
+            <input type="text" id="multaa" name="multa" ng-model="multa" placeholder="Multa"/>
+          </label>
+          
+          
+          <label for="jurosaodia">Juros/dia
+            <input type="text" id="jurosaodia" name="jurosaodia" ng-model="jurosaodia" placeholder="Juros ao dia"/>
+          </label>
+          <label for="valorConta">Valor
+            <input type="text" id="valorConta" name="valor" ng-model="valorConta" placeholder="Valor da conta"/>
+          </label>
+        
+    
+          <input type="button" id="salvarContas" value="Salvar"/>
+          <input type="reset" value="Limpar"/>
+        
+    
+        
+        
+      
+
+
+        </section>
+        
+      </form>
+    </article>
+
+    <!-- Relatorios-->
+    <article ng-show="relatorios" class="content scrollable header">
+      <form>
+        <section>
+         
+          <table id="tableEntrada">
+        <caption>Entradas</caption>
+          <thead>
+            <tr>
+              <th>Descrição</th>
+              <th>Data    </th>
+              <th>Valor</th>
+              <th>Action</th>
+              
+            </tr> 
+          </thead>  
+          
+          <tbody>
+            
+
+          <tr  ng-repeat="c in contas">
+          <td>{{c.descricao}}</td>
+          <td>{{c.vencimento}}</td>
+          <td>{{c.valor}}</td>
+          <td>[<a href="#" ng-click="editar(c)">Editar</a> <a href="#" ng-click="excluir(c)">Excluir</a>
+            <a href="#" ng-click="pagar(c)">Pagar</a>]</td>
+        </tr>
+              
+              
+              
+            
+            
+            
+          </tbody>
+            
+        
+      </table>
+
+        </section>
+      </form>
+    </article>
+
+    
+</section>
+
+
+
+
+
+<script src="js/vendor/angular.min.js"></script>
+<script src="js/conversionApp.js"></script>
+<script src="js/controllers/contasController.js"></script>
+<script src="js/dao/ContasDao.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+
+input {
+	margin: 1rem auto;
+}
+
+.result {
+	font-size: 6rem;
+	margin-top: -1rem;
+}
+
+#drawer {
+	height: 1000px;
+}
+
+section .label {
+	font-size: 4rem;
+}
