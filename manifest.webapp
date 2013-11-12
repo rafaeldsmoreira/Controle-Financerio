@@ -1,14 +1,14 @@
 {
   "version": "1",
-  "name": "Unit Converter",
-  "launch_path": "/index.html",
-  "description": "App to convert KM to Mile",
+  "name": "Controle Financeiro",
+  "launch_path": "/Index.html",
+  "description": "Controe Financeiro",
   "icons": {
-    "128": "/images/logo128.png"
+    "128": "/images/fundo.jpg"
   },
   "developer": {
-    "name": "Edy Segura",
-    "url": "http://www.edy.com.br"
+    "name": "Rafael Moreira",
+    "url": ""
   },
   "installs_allowed_from": ["*"],
   "default_locale": "en"

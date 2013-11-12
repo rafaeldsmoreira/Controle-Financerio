@@ -1,14 +1,13 @@
 
-conversionApp.controller('ContasController', function($scope) {
+conversionApp.controller('ContasDao', function($scope) {
 
 	//initialization
-
-	$scope.contas=[];
-	$scope.STORAGE_KEY=$scope.conta;
+$scope.entradas = true;
+	alert('iniciando');
 
 		
 	
-		$scope.salveStorage = function() {
+	/*	$scope.salveStorage = function() {
 		localStorage.setItem($scope.STORAGE_KEY, JSON.stringify($scope.contas));
 		
 	};
@@ -30,8 +29,8 @@ $scope.load=function() {
 		}
 		ContasDAO.Contas = [];
 		return false;
-	}
+	}*/
 
 
 
-)};
+});
