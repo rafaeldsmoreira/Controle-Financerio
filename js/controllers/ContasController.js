@@ -6,6 +6,7 @@ conversionApp.controller('ContasController', function($scope) {
 	$scope.pgcontas=[];
 	$scope.STORAGE_KEY=$scope.conta;
 	$scope.STORAGEPGCONTA_KEY=$scope.pgcontas;
+	$scope.valorTotal='';
 
 
 //----------------------------------------------------------------------------------------------------
@@ -76,6 +77,42 @@ $scope.addContasPg= function(){
 
 
 //-------------------------------------------------------------------------------------------------------	
+	$scope.pagarConta=function(contaApg) {
+
+		$scope.setpagar();
+		$scope.pgconta=contaApg;
+		
+
+		//$scope.pgconta.valor=$scope.pgconta.multa+$scope.pgconta.valor;
+		
+
+    };
+
+
+    $scope.calcularTotal=function() {
+     
+		
+		 $socpe.valtemp='';
+		 $socpe.valtempMulta='';
+		 $socpe.valtemp=$scope.pgconta.valor;
+		 $socpe.valtempMulta=$scope.pgconta.Multa;
+		 $scope.pgconta.valor='';
+         $scope.pgconta.valor=$socpe.valtempMulta+$socpe.valtemp;
+         
+
+
+
+
+
+    };
+
+
+
+
+
+
+
+//-------------------------------------------------------------------------------------------------------------------
 	$scope.addListContas= function() {
 
 		$scope.contas.push({
@@ -102,7 +139,7 @@ $scope.addContasPg= function(){
 		});
 	};
 
-//-------------------------------------------------------------------------------------------------------------------
+
 
     $scope.salveStorageContas = function() {
 		localStorage.setItem($scope.STORAGE_KEY, JSON.stringify($scope.contas));
@@ -162,35 +199,6 @@ $scope.addContasPg= function(){
 
 
 
-	$scope.pagarConta=function(contapg) {
-
-		$scope.conta=contapg;
-		$scope.index = $scope.contas.indexOf(contapg);
-		
-
-		$scope.setpagar();
-		
-		
-
-			 alert('contav'+$scope.contapg.multa);
-		
-		
-
-		
-		$scope.pgconta.datalancamento='';
-		$scope.pgconta.datavencimento=contapg.vencimento;
-		$scope.pgconta.multa=$scope.contapg.multa;
-		$scope.pgconta.jurosaodia=contapg.jurosaodia;
-		$scope.pgconta.valor='10';
-
-		//$scope.pgconta.valorConta=($scope.contapg.multa+(contapg.valor*$scope.contapg.jurosaodia/100)+contapg.valor);
-
-		
-        
-			//$scope.pgcontas[index]=pgconta;
-	
-
-};
 
 
 //---------------------------------------------Gerar id--------------------------------------------------------------------------

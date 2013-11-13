@@ -68,11 +68,13 @@
             <label for="data">Vencimento
             <input type="date"   ng-model="conta.vencimento" placeholder="Vencimento"/></label>
             <label > Valor
-            <input type="text" id="valor"  ng-model="conta.valor" placeholder="Valor"/> </label>    
+            <input type="number" id="valor"  ng-model="conta.valor" placeholder="Valor"/> </label>    
             <button ng-click="addContas()">Add</button>
             <button ng-click="load()">visualizar</button>
             <button type="reset()">Limpar</button> 
          </section>
+
+
       </form>
  <!--__________________________Table entradas________________________ -->
         <section>
@@ -103,34 +105,39 @@
 
     <!--__________________________ Pagar contas_____________________________________ -->
     <article ng-show="pagar" class="content scrollable header">
-      <form>
+      <form id="formContaspg">
         <section>
           <legend>Dados da conta</legend>
           <label for="descricaoc">Descrição
-          <input type="text" id="descricaoc" ng-model="pgconta.descricaocpg" placeholder="Descrição"/>
-          <input id="idConta" type="hidden" ng-model="idContapg" value="0" /></label>
+          <input type="text"  ng-model="pgconta.descricao"  placeholder="Descrição"/>
+          <input  type="hidden" ng-model="idContapg" value="0" /></label>
           
           <label for="datalancamento">Data do Lançamento
-          <input type="text" id="datalancamento" readonly="readonly" ng-model="pgconta.datalancamento" placeholder="Data"/></label>
+          <input type="text"   ng-model="pgconta.datalancamento" placeholder="Data"/></label>
           
           <label for="datavencimento">Data do Vencimento
-          <input type="text" id="datavencimento"readonly="readonly" ng-model="pgconta.datavencimento" placeholder="Vencimento"/><label>
+          <input type="text"  ng-model="pgconta.vencimento" placeholder="Vencimento"/><label>
           
-          <label for="multaa">Multa
-          <input type="text" id="multaa" name="multa" ng-model="pgconta.multa" placeholder="Multa"/>
+          <label>Multa
+          <input type="number"  ng-model="pgconta.multa"   value="0" ng-change="calcularTotal()" placeholder="Multa"/>
           </label>
           
-          <label for="jurosaodia">Juros/dia
-          <input type="text" id="jurosaodia" name="jurosaodia" ng-model="pgconta.jurosaodia" placeholder="Juros ao dia"/></label>
+          <label>Juros/dia
+          <input type="number"  ng-model="pgconta.jurosaodia" placeholder="Juros ao dia"/></label>
           
-          <label for="valorConta">Valor
-          <input type="text" id="valorConta" name="valor" ng-model="pgconta.valorConta" placeholder="Valor da conta"/></label>
+          <label>Valor
+          <input type="number" ng-model="pgconta.valor" placeholder="Valor da conta"/></label>
           
-          <input type="button" id="salvarContas" value="Salvar"/>
+          {{pgconta.valorConta}}
+          <button  ng-click="pagarConta()" />Pagar</button>
           <input type="reset" value="Limpar"/>
         </section>
       </form>
+
+     
     </article>
+
+  
  <!--__________________________ Relatórios____________________________ -->
     <article ng-show="relatorios" class="content scrollable header">
       
