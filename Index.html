@@ -15,161 +15,226 @@
 <title>Unit Converter</title>
 
 </head>
-<body ng-controller="ContasController" ng-init="load()">
-
-
+<body ng-controller="ContasController" ng-init="load()" ng-init="loadContasPagas()">
 
 <section id="index" data-position="current">
-  <section data-type="sidebar">
-    <header>
-      <menu type="toolbar">
-        <a href="#">Done</a>
-      </menu>
-      <h1>Units</h1>
-    </header>
-    <nav>
-      <h2>Length</h2>
-          <ul>
-            <li>
-              <a href="#" ng-click="setentradas()">Entrada de contas</a>
-            </li>
-            <li>
-              <a href="#" ng-click="setpagar()">Pagar conta</a>
-            </li>
-            <li>
-              <a href="#" ng-click="setrelatorio()">Relatorios</a>
-            </li>
-            </ul>
-    </nav>
-  </section>
+      <section data-type="sidebar">
+        <header>
+          <menu type="toolbar">
+            <a href="#">Done</a>
+          </menu>
+          <h1>Units</h1>
+        </header>
+          <nav>
+            <h2>Length</h2>
+                <ul>
+                    <li>
+                      <a href="#" ng-click="setentradas()">Lançar nova conta</a>
+                    </li>
+                     <li>
+                      <a href="#" ng-click="setrelPagarconta()">Contas a pagar</a>
+                    </li>
+                    
+                    <li>
+                      <a href="#" ng-click="setrelatorio()">Relaçõo de contas</a>
+                    </li>
+                     <li>
+                      <a href="#" ng-click="setContasPagas()">Contas Pagas</a>
+                    </li>
+                  </ul>
+          </nav>
+       </section>
 
 
 
-  <section id="drawer" role="region">
-    <header class="fixed">
-        <a href="#">
-          <span class="icon icon-menu">hide sidebar</span>
-        </a>
-        <a href="#drawer">
-          <span class="icon icon-menu">show sidebar</span>
-        </a>
-        <h1>Controle Financeiro</h1>
-      </header>
+       <section id="drawer" role="region">
+            <header class="fixed">
+                <a href="#">
+                  <span class="icon icon-menu">hide sidebar</span>
+                </a>
+                <a href="#drawer">
+                  <span class="icon icon-menu">show sidebar</span>
+                </a>
+                <h1>Controle Financeiro</h1>
+              </header>
 
- <!--__________________________ Entradas _____________________________ -->
-
-
-    <article ng-show="entradas" class="content scrollable header">
-      <form id="contas">
-        <section>
-            <label for="descricao">Descrição
-            <input type="text" name="descricao" ng-model="conta.descricao" placeholder="Descrição" />
-            <input id="id" type="hidden" ng-model="conta.idEntrada" value="0"/></label>
-            <label for="data">Vencimento
-            <input type="date"   ng-model="conta.vencimento" placeholder="Vencimento"/></label>
-            <label > Valor
-            <input type="number" id="valor"  ng-model="conta.valor" placeholder="Valor"/> </label>    
-            <button ng-click="addContas()">Add</button>
-            <button ng-click="load()">visualizar</button>
-            <button type="reset()">Limpar</button> 
-         </section>
+         <!--__________________________ Lançamento de contas _____________________________ -->
 
 
-      </form>
- <!--__________________________Table entradas________________________ -->
-        <section>
-           <table id="tableEntrada">
-               <caption>Entradas</caption>
-                <thead>
-                  <tr>
-                     <th>id</th>
-                    <th>Descrição</th>
-                    <th>Data    </th>
-                    <th>Valor</th>
-                    <th>Action</th>
-                   </tr> 
-                </thead>  
-                 <tbody>
-                    <tr  ng-repeat="c in contas">
-                      <td>{{c.idEntrada}}</td>
-                      <td>{{c.descricao}}</td>
-                      <td>{{c.vencimento}}</td>
-                      <td>{{c.valor}}</td>
-                      <td>[<a href="#" ng-click="editarConta(c)">Editar</a> <a href="#" ng-click="removeConta(c)">Excluir</a>
-                      <a href="#" ng-click="pagarConta(c)">Pagar</a>]</td>
-                    </tr>
-                 </tbody>
-            </table>
+            <article ng-show="entradas" class="content scrollable header">
+              <form id="contas">
+                <section>
+                    <label>Descrição</label>
+                    <input type="text" autofocus="" autocomplete="off" name="descricao" ng-model="conta.descricao" placeholder="Descrição" />
+                    <input id="id" autofocus="" autocomplete="off" type="hidden" ng-model="conta.idEntrada" value="0"/>
+                    <input id="id" autofocus="" autocomplete="off" type="hidden" ng-model="conta.status" />
+                    <label for="data">Vencimento</label>
+                    <input type="date" autofocus="" autocomplete="off"  ng-model="conta.vencimento" placeholder="Vencimento"/>
+                    <label > Valor</label> 
+                    <input type="number" autofocus="" autocomplete="off" id="valor"  ng-model="conta.valor" placeholder="Valor"/>    
+                    <button ng-click="addContas()">Add</button>
+                    
+                    <button type="reset()">Limpar</button> 
+                 </section>
+
+
+              </form>
+            </article>
+         
+            <!--__________________________ Pagar contas_____________________________________ -->
+            <article ng-show="pagar" class="content scrollable header">
+              <form id="formContaspg">
+                <section>
+                  <legend>Dados da conta</legend>
+                  <label >Descrição</label>
+                  <input type="text" autofocus="" autocomplete="off" ng-model="pgconta.descricao"  placeholder="Descrição"/>
+                  <input  type="hidden"autofocus="" autocomplete="off" ng-model="pgconta.idContapg" value="0" />
+                  <input  type="hidden" autofocus="" autocomplete="off" ng-model="pgconta.status"/>
+                  
+                  <label >Data do Lançamento</label>
+                  <input type="text" autofocus="" autocomplete="off"   ng-model="pgconta.datalancamento" placeholder="Data"/>
+                  
+                  <label >Data do Vencimento<label>
+                  <input type="text" autofocus="" autocomplete="off" ng-model="pgconta.vencimento" placeholder="Vencimento"/>
+                  
+                  <label>Multa</label>
+                  <input type="text" autofocus="" autocomplete="off" ng-model="pgconta.multa"   value="0"  placeholder="Multa"/>
+                  
+                  
+                  <label>Juros/dia</label>
+                  <input type="text" autofocus="" autocomplete="off" ng-model="pgconta.jurosaodia" placeholder="Juros" value="0"/>
+
+                  
+                  <label>Valor {{pgconta.valor}}</label>
+                  <input type="number" autofocus="" autocomplete="off" ng-model="pgconta.valorApg" placeholder="Valor a pagar" ng-click="calcularTotal()"/>
+                  
+                  {{pgconta.valorConta}}
+                  <button  ng-click="addContasPg()" />Pagar</button>
+                  
+                  <input type="reset" value="Limpar"/>
+                </section>
+              </form>
+
+             
+            </article>
+
+             
+
+          
+             <!--__________________________ Relatórios____________________________ -->
+                <article ng-show="relatorios" class="content scrollable header">
+                    <section>
+                      <table id="tableEntrada">
+                          <caption>Relação de contas</caption>
+                              <thead>
+                                 <tr>
+                                    <th>Pg</th>
+                                    <th>Descrição</th>
+                                    <th>Vencimento    </th>
+                                    <th>Multa</th>
+                                    <th>jurosaodia</th>
+                                    <th>valorConta</th>
+                                    <th>valorPg</th>
+                                </tr> 
+                            
+                                <tr  ng-repeat="c in contas">
+                                      <td>{{c.status}}</td>
+                                      <td>{{c.descricao}}</td>
+                                      <td>{{c.vencimento}}</td>
+                                      <td>{{c.multa}}</td>
+                                      <td>{{c.jurosaodia}}</td>
+                                      <td>{{c.valor}}</td>
+                                      <td>{{c.valorApg}}</td>
+
+                                 </tr>
+
+                                 <tr  ng-repeat="co in contasApg">
+                                      <td>{{co.status}}</td>
+                                      <td>{{co.descricao}}</td>
+                                      <td>{{co.vencimento}}</td>
+                                      <td>{{co.multa}}</td>
+                                      <td>{{co.jurosaodia}}</td>
+                                      <td>{{co.valor}}</td>
+                                      <td>{{co.valorApg}}</td>
+                                  </tr>
+                          </tbody>
+                      </table>
+                    </section>
+                </article>
+
+
+
+                <!--__________________________ CONTAS PAGAS____________________________ -->
+                <article ng-show="contasPg" class="content scrollable header">
+                  
+                    <section>
+                      <table id="tableEntrada">
+                          <caption>Relação de contas</caption>
+                              <thead>
+                                 <tr>
+                                <th>Pg</th>
+                                <th>Descrição</th>
+                                <th>Pagamento</th>
+                                <th>Vencimento</th>
+                                <th>Multa</th>
+                                <th>jurosaodia</th>
+                                <th>valorConta</th>
+                                <th>valorPg</th>
+
+                                <th>Action</th>
+                               </tr> 
+                            </thead>  
+                             <tbody>
+                                <tr  ng-repeat="co in contasApg">
+
+                                  <td>{{co.status}}</td>
+                                  <td>{{co.descricao}}</td>
+                                  <td>{{co.lancamento}}</td>
+                                  <td>{{co.vencimento}}</td>
+                                  <td>{{co.multa}}</td>
+                                  <td>{{co.jurosaodia}}</td>
+                                  <td>{{co.valor}}</td>
+                                  <td>{{co.valorApg}}</td>
+                                  <td>[ <a href="#" ng-click="estornarContaPg(co)">Estornar]</a></td>
+                                </tr>
+                          </tbody>
+                      </table>
+                    </section>
+                </article>
+
+
+
+
+            <!--__________________________ Relatórios Contas a pagar____________________________ -->
+                
+                <article ng-show="relContasApagar" class="content scrollable header">
+                  <section>
+                      <table>
+                           <caption>Entradas</caption>
+                            <thead>
+                              <tr>
+                                 
+                                <th>Descrição</th>
+                                <th>Data    </th>
+                                <th>Valor</th>
+                                <th>Action</th>
+                               </tr> 
+                            </thead>  
+                             <tbody>
+                                <tr  ng-repeat="c in contas">
+                                  
+                                  <td>{{c.descricao}}</td>
+                                  <td>{{c.vencimento}}</td>
+                                  <td>{{c.valor}}</td>
+                                  <td>[<a href="#" ng-click="editarConta(c)">Editar</a> <a href="#" ng-click="removeConta(c)">Excluir</a>
+                                  <a href="#" ng-click="pagarConta(c)">Pagar</a>]</td>
+                                </tr>
+                             </tbody>
+                        </table>
+                    </section>
+                </article>
           </section>
-    </article>
-
-    <!--__________________________ Pagar contas_____________________________________ -->
-    <article ng-show="pagar" class="content scrollable header">
-      <form id="formContaspg">
-        <section>
-          <legend>Dados da conta</legend>
-          <label for="descricaoc">Descrição
-          <input type="text"  ng-model="pgconta.descricao"  placeholder="Descrição"/>
-          <input  type="hidden" ng-model="idContapg" value="0" /></label>
-          
-          <label for="datalancamento">Data do Lançamento
-          <input type="text"   ng-model="pgconta.datalancamento" placeholder="Data"/></label>
-          
-          <label for="datavencimento">Data do Vencimento
-          <input type="text"  ng-model="pgconta.vencimento" placeholder="Vencimento"/><label>
-          
-          <label>Multa
-          <input type="number"  ng-model="pgconta.multa"   value="0" ng-change="calcularTotal()" placeholder="Multa"/>
-          </label>
-          
-          <label>Juros/dia
-          <input type="number"  ng-model="pgconta.jurosaodia" placeholder="Juros ao dia"/></label>
-          
-          <label>Valor
-          <input type="number" ng-model="pgconta.valor" placeholder="Valor da conta"/></label>
-          
-          {{pgconta.valorConta}}
-          <button  ng-click="pagarConta()" />Pagar</button>
-          <input type="reset" value="Limpar"/>
-        </section>
-      </form>
-
-     
-    </article>
-
-  
- <!--__________________________ Relatórios____________________________ -->
-    <article ng-show="relatorios" class="content scrollable header">
-      
-        <section>
-          <table id="tableEntrada">
-              <caption>Entradas</caption>
-                  <thead>
-                    <tr>
-                      <th>Descrição</th>
-                      <th>Data    </th>
-                      <th>Valor</th>
-                      <th>Action</th>
-                    </tr> 
-                  </thead>  
-            
-              <tbody>
-                <tr  ng-repeat="c in contas">
-                  <td>{{c.descricao}}</td>
-                  <td>{{c.vencimento}}</td>
-                  <td>{{c.valor}}</td>
-                  <td>[<a href="#" ng-click="editar(c)">Editar</a> <a href="#" ng-click="excluir(c)">Excluir</a>
-                    <a href="#" ng-click="pagar(c)">Pagar</a>]</td>
-                </tr>
-              </tbody>
-          </table>
-        </section>
-    </article>
-</section>
-
-
-
-
+    </section>
 
 <script src="js/vendor/angular.min.js"></script>
 <script src="js/conversionApp.js"></script>
